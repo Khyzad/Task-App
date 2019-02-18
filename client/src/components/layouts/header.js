@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import About from '../pages/about';
-import Home from '../pages/about';
+import { Link } from 'react-router-dom';
+import SignUp from '../forms/signup';
+import SignIn from '../forms/signin';
+import SignOut from '../forms/signout';
 
 
 class Header extends Component {
@@ -10,12 +11,20 @@ class Header extends Component {
 			<header style={bannerStyle} id="header" class="hero is-dark">
 				<div class="hero-head" style={titleStyle}>
 					<h1 class="title is-center">Library App</h1>
-					<h2 class="subtitle">A proof of concept</h2>
+					<h4 class="subtitle">A proof of concept</h4>
 				</div>
 				<section id="nav-links" class="" style={navStyle}>
 					<span><Link to='/'>Home</Link></span>
-					<span>Sign in</span>
-					<span>Sign up</span>
+					{localStorage.getItem('session') ?
+						<span><SignOut /></span>
+						:
+						<span><SignIn /></span>
+					}
+					{localStorage.getItem('session') ?
+						<span><Link to='/dashboard'>Dashboard</Link></span>
+						:
+						<span><SignUp /></span>
+					}
 					<span><Link to='/about'>About</Link></span>
 				</section>
 			</header>
@@ -25,7 +34,9 @@ class Header extends Component {
 
 const bannerStyle = {
 	display: 'grid',
-	gridTemplateColumns: '3fr 1fr'
+	gridTemplateColumns: '3fr 1fr',
+	backgroundColor: '#363636',
+	color: '#f5f5f5'
 }
 
 const titleStyle = {

@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const session = require('express-session');
 const validator = require('express-validator');
+const cors = require('cors');
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use(validator({
 	}
 }));
 
+app.use(cors());
 
 // apply routes to app
 app.use('/api/book', bookRoutes)
