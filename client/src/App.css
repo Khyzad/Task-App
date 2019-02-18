@@ -1,0 +1,9 @@
+#nav-links span:hover{
+  background-color:black
+}
+
+#nav-links span{
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
