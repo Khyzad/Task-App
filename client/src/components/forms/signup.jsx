@@ -4,9 +4,6 @@ import { signUp } from '../../actions/userActions';
 import {
 	Button,
 	Form,
-	FormGroup,
-	Label,
-	FormText,
 	Input,
 	Modal,
 	ModalHeader,

@@ -4,10 +4,6 @@ import { signOut } from '../../actions/userActions';
 import { Button } from 'reactstrap';
 
 class SignOut extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	logout = e => {
 		e.preventDefault(e);
 		this.props.signOut(localStorage.getItem('session'));

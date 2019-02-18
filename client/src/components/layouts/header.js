@@ -8,12 +8,12 @@ import SignOut from '../forms/signout';
 class Header extends Component {
 	render() {
 		return (
-			<header style={bannerStyle} id="header" class="hero is-dark">
-				<div class="hero-head" style={titleStyle}>
-					<h1 class="title is-center">Library App</h1>
-					<h4 class="subtitle">A proof of concept</h4>
+			<header style={bannerStyle} id="header" >
+				<div style={titleStyle}>
+					<h1>Library App</h1>
+					<h4>A proof of concept</h4>
 				</div>
-				<section id="nav-links" class="" style={navStyle}>
+				<section id="nav-links" style={navStyle}>
 					<span><Link to='/'>Home</Link></span>
 					{localStorage.getItem('session') ?
 						<span><SignOut /></span>
