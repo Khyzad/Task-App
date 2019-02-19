@@ -17,6 +17,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 // declare routes
 const bookRoutes = require('./src/routes/api/book-routes');
 const userRoutes = require('./src/routes/api/user-routes');
+const taskRoutes = require('./src/routes/api/task-routes');
 
 // apply parsers to app
 app.use(bodyParser.json());
@@ -50,6 +51,7 @@ app.use(cors());
 // apply routes to app
 app.use('/api/book', bookRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/task', taskRoutes)
 
 // set up port
 app.set('port', (process.env.PORT || 8080));

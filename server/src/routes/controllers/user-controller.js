@@ -1,10 +1,6 @@
 const User = require('../../models/user');
 const Session = require('../../models/session');
 
-
-
-
-
 exports.signUp = async (req, res) => {
 	try {
 		console.log('attempting to sign up new user')

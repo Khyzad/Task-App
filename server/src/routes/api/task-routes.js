@@ -2,29 +2,30 @@ const express = require('express');
 const router = express.Router();
 const taskController = require('../controllers/task-controller')
 
-// get all
-router.get('/', (req, res) => {
-	res.send('unimplemented')
-});
 
-// get book by id
+// get tasks by id
 router.get('/:id', (req, res) => {
-	res.send('unimplemented')
+	taskController.getAllTasks(req, res);
 });
 
-// add book
-router.post('/', (req, res) => {
+// add tasks
+router.put('/:id', (req, res) => {
 	taskController.addTask(req, res);
 });
 
-// delete book
-router.delete('/:id', (req, res) => {
-	res.send('unimplemented')
+// delete tasks
+router.delete('/:id/:task', (req, res) => {
+	taskController.deleteTask(req, res);
 });
 
-// update book
-router.post('/:id', (req, res) => {
-	res.send('unimplemented')
+// delete all tasks
+router.delete('/:id', (req, res) => {
+	taskController.deleteAllTasks(req, res);
+});
+
+// update tasks
+router.post('/:id/:task', (req, res) => {
+	taskController.updateTask(req, res);
 });
 
 module.exports = router;

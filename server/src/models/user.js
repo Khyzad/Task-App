@@ -8,7 +8,25 @@ const UserSchema = {
 	},
 	password: String,
 	email: String,
-	books: [String]
+	books: [String],
+	tasks: [
+		{
+			title: String,
+			description: {
+				type: String,
+				default: ''
+			},
+			completed: {
+				type: Boolean,
+				default: false
+			},
+			dueDate: Date,
+			createDate: {
+				type: Date,
+				default: Date.now
+			},
+		}
+	]
 }
 
 const User = module.exports = mongoose.model('User', UserSchema)
