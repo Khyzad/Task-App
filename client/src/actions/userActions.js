@@ -3,6 +3,7 @@ import axios from 'axios';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_OUT = 'SIGN_OUT';
+export const GET_TASKS = 'GET_TASKS';
 
 export const signUp = form => dispatch => {
 	console.log('inside signup action reducer');
@@ -32,12 +33,14 @@ export const signIn = form => dispatch => {
 	axios.post('/user/signIn', form)
 		.then(res => {
 
+			console.log(res.data)
 			localStorage.setItem('session', res.data.session)
+
 			dispatch({
 				type: SIGN_IN,
 				payload: {
 					session: res.data.session,
-					books: res.data.books
+					tasks: res.data.tasks
 				}
 			})
 
@@ -63,4 +66,24 @@ export const signOut = session => dispatch => {
 		}).catch(e => {
 			console.log(e)
 		})
+}
+
+export const getTasks = () => dispatch => {
+	axios.get(`/task/${localStorage.getItem('session')}`)
+		.then(res => {
+			//console.log(res.data.tasks);
+			dispatch({
+				type: GET_TASKS,
+				payload: { tasks: res.data.tasks }
+			})
+
+			return res.data.tasks;
+		})
+		.catch(e => {
+			console.log(e)
+		})
+}
+
+export const touch = () => dispatch => {
+	dispatch({ type: '' })
 }

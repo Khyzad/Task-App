@@ -35,8 +35,11 @@ class Header extends Component {
 const bannerStyle = {
 	display: 'grid',
 	gridTemplateColumns: '3fr 1fr',
-	backgroundColor: '#363636',
-	color: '#f5f5f5'
+	backgroundColor: '#161234',
+	color: '#f5f5f5',
+	borderBottomStyle: 'outset',
+	borderColor: 'rgb(29, 29, 29)'
+	// borderBottomColor: 'outset'
 }
 
 const titleStyle = {

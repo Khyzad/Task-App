@@ -35,7 +35,7 @@ exports.signIn = async (req, res) => {
 
 			res.status(201).json({
 				session: session._id,
-				books: user.books
+				tasks: user.tasks
 			})
 		} else {
 			res.status(406).json({ error: 'invalid email/password combination' })

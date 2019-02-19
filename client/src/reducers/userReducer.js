@@ -1,8 +1,9 @@
-import { SIGN_IN, SIGN_OUT, SIGN_UP } from '../actions/userActions';
+import { SIGN_IN, SIGN_OUT, SIGN_UP, GET_TASKS } from '../actions/userActions';
 
 const initialState = {
 	session: '',
-	books: []
+	tasks: [],
+	touch: false
 };
 
 export default (state = initialState, action) => {
@@ -15,14 +16,24 @@ export default (state = initialState, action) => {
 		case SIGN_IN:
 			return {
 				...state,
+				session: action.payload.session,
 			}
 		case SIGN_OUT: {
 			return {
 				session: '',
-				books: []
+				tasks: []
+			}
+		}
+		case GET_TASKS: {
+			return {
+				...state,
+				tasks: action.payload.tasks
 			}
 		}
 		default:
-		return state;
+			return {
+				...state,
+				touch: !state.touch
+			};
 	}
 }
