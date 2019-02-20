@@ -19,7 +19,7 @@ body {
   outline:none;
 }
 
-.complete-button {
+.completed-button {
   background-color: transparent;
   color: green;
   border-style:none;

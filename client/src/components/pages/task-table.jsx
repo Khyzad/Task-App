@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { touch, getTasks } from '../../actions/userActions';
+import { touch, getTasks, toggleComplete } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {
 	Table,
@@ -11,8 +11,32 @@ class TaskTable extends Component {
 
 		this.state = {
 			globalCheck: false,
-			tasks: props.tasks
 		}
+	}
+
+	toggleComplete = e => {
+		this.props.toggleComplete(this.props.tasks[e.target.name], e.target.name);
+	}
+
+	className = (task) => {
+		if (task.completed)
+			return "completed-button"
+		else
+			return "inprogress-button"
+	}
+
+	value = task => {
+		if (task.completed)
+			return "✓"
+		else
+			return "O"
+	}
+
+	strike = task => {
+		if (task.completed)
+			return {
+				textDecoration: 'line-through red'
+			}
 	}
 
 	globalCheck = e => {
@@ -26,12 +50,10 @@ class TaskTable extends Component {
 				<thead>
 					<tr>
 						<th id="delete-col" width="5%" >
-							{/* <input name="globalCheck" type="checkbox" checked={this.state.globalCheck} onChange={this.globalCheck} /> */}
 							<button className="delete-button">X</button>
 						</th>
 						<th id="check-col" width="5%" >
-							{/* <input name="globalCheck" type="checkbox" checked={this.state.globalCheck} onChange={this.globalCheck} /> */}
-							<button className="complete-button">✓</button>
+							<button className="completed-button">✓</button>
 						</th>
 						<th width="90%">Tasks</th>
 					</tr>
@@ -40,9 +62,16 @@ class TaskTable extends Component {
 					{this.props.tasks.map((task, i) => {
 						return (
 							<tr key={"row" + i}>
-								<td><button className="delete-button" name={"checkbox" + task._id} type="checkbox">X</button> </td>
-								<td><button className="inprogress-button" name={"checkbox" + task._id} type="checkbox">O</button> </td>
-								<td onDoubleClick={this.doubleclick}>{task.title}</td>
+								<td><button className="delete-button" name={i}>X</button> </td>
+								<td>
+									<button
+										className={this.className(task)}
+										name={i}
+										onClick={this.toggleComplete}>
+										{this.value(task)}
+									</button>
+								</td>
+								<td onDoubleClick={this.doubleclick} style={this.strike(task)}>{task.title}</td>
 							</tr>
 						);
 					})}
@@ -52,4 +81,6 @@ class TaskTable extends Component {
 	}
 }
 
-export default connect(null, { touch, getTasks })(TaskTable);
+
+
+export default connect(null, { touch, getTasks, toggleComplete })(TaskTable);

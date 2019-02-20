@@ -1,4 +1,11 @@
-import { SIGN_IN, SIGN_OUT, SIGN_UP, GET_TASKS, ADD_TASK } from '../actions/userActions';
+import {
+	SIGN_IN,
+	SIGN_OUT,
+	SIGN_UP,
+	GET_TASKS,
+	ADD_TASK,
+	TOGGLE_COMPLETE
+} from '../actions/userActions';
 
 const initialState = {
 	session: '',
@@ -37,6 +44,16 @@ export default (state = initialState, action) => {
 					...state.tasks,
 					action.payload.task
 				]
+			}
+		}
+		case TOGGLE_COMPLETE: {
+			return {
+				...state,
+				tasks: state.tasks.map((task,i) => {
+					if (i == action.payload.i)
+						task.completed = !task.completed
+					return task;
+				}),
 			}
 		}
 		default:

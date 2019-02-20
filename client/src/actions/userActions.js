@@ -5,6 +5,7 @@ export const SIGN_UP = 'SIGN_UP';
 export const SIGN_OUT = 'SIGN_OUT';
 export const GET_TASKS = 'GET_TASKS';
 export const ADD_TASK = 'ADD_TASK';
+export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
 
 export const signUp = form => dispatch => {
 	console.log('inside signup action reducer');
@@ -100,6 +101,20 @@ export const addTask = (form) => dispatch => {
 		})
 }
 
+export const toggleComplete = (task, i) => dispatch => {
+	dispatch({
+		type:TOGGLE_COMPLETE,
+		payload: {
+			task:{
+				...task,
+				completed: !task.completed
+			},
+			i: i
+		}
+	})
+}
+
 export const touch = () => dispatch => {
 	dispatch({ type: '' })
 }
+
