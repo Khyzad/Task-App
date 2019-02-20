@@ -34,10 +34,13 @@ class Dashboard extends Component {
 		return (
 			<div id="dashboard">
 				<div>
-					<div id="task-button-panel">
-						<AddTask />
-						<Button id="delete-task">Delete</Button>
-						<span id="display-count">Showing x of y</span>
+					<div id="task-panel">
+						<div id="task-button-panel">
+							<AddTask />
+							<Button>Save</Button>
+							<Button>Undo</Button>
+						</div>
+						<div id="display-count">Showing x of y</div>
 					</div>
 					<TaskTable tasks={this.props.tasks} />
 				</div>

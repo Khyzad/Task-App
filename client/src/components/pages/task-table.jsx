@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {touch, getTasks} from '../../actions/userActions';
+import { touch, getTasks } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {
 	Table,
@@ -25,17 +25,23 @@ class TaskTable extends Component {
 			<Table borderless striped dark hover id="task-table">
 				<thead>
 					<tr>
-						<th width="5%" >
-							<input name="globalCheck" type="checkbox" checked={this.state.globalCheck} onChange={this.globalCheck} />
+						<th id="delete-col" width="5%" >
+							{/* <input name="globalCheck" type="checkbox" checked={this.state.globalCheck} onChange={this.globalCheck} /> */}
+							<button className="delete-button">X</button>
 						</th>
-						<th width="95%">Tasks</th>
+						<th id="check-col" width="5%" >
+							{/* <input name="globalCheck" type="checkbox" checked={this.state.globalCheck} onChange={this.globalCheck} /> */}
+							<button className="complete-button">✓</button>
+						</th>
+						<th width="90%">Tasks</th>
 					</tr>
 				</thead>
 				<tbody>
 					{this.props.tasks.map((task, i) => {
 						return (
 							<tr key={"row" + i}>
-								<td><input name={"checkbox" + task._id} type="checkbox" /></td>
+								<td><button className="delete-button" name={"checkbox" + task._id} type="checkbox">X</button> </td>
+								<td><button className="inprogress-button" name={"checkbox" + task._id} type="checkbox">O</button> </td>
 								<td onDoubleClick={this.doubleclick}>{task.title}</td>
 							</tr>
 						);
@@ -46,4 +52,4 @@ class TaskTable extends Component {
 	}
 }
 
-export default connect(null, {touch, getTasks})(TaskTable);
+export default connect(null, { touch, getTasks })(TaskTable);

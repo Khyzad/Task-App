@@ -46,8 +46,8 @@ class AddTask extends Component {
 
 	render() {
 		return (
-			<div>
-				<Button id="add-task" onClick={this.toggle}>Add</Button>
+			<div id="add-task">
+				<Button onClick={this.toggle}>Add</Button>
 				<Modal isOpen={this.state.modal} toggle={this.toggle}>
 					<Form onSubmit={this.submit}>
 						<ModalHeader toggle={this.toggle}>
