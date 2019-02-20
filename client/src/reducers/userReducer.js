@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, SIGN_UP, GET_TASKS } from '../actions/userActions';
+import { SIGN_IN, SIGN_OUT, SIGN_UP, GET_TASKS, ADD_TASK } from '../actions/userActions';
 
 const initialState = {
 	session: '',
@@ -28,6 +28,15 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				tasks: action.payload.tasks
+			}
+		}
+		case ADD_TASK: {
+			return {
+				...state,
+				tasks: [
+					...state.tasks,
+					action.payload.task
+				]
 			}
 		}
 		default:

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { touch, getTasks } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import TaskTable from './task-table';
+import AddTask from './add-task';
 import {
 	Button
 } from 'reactstrap';
@@ -34,7 +35,7 @@ class Dashboard extends Component {
 			<div id="dashboard">
 				<div>
 					<div id="task-button-panel">
-						<Button id="add-task" onClick={this.click}>Add</Button>
+						<AddTask />
 						<Button id="delete-task">Delete</Button>
 						<span id="display-count">Showing x of y</span>
 					</div>

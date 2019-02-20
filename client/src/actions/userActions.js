@@ -4,6 +4,7 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_OUT = 'SIGN_OUT';
 export const GET_TASKS = 'GET_TASKS';
+export const ADD_TASK = 'ADD_TASK';
 
 export const signUp = form => dispatch => {
 	console.log('inside signup action reducer');
@@ -81,6 +82,21 @@ export const getTasks = () => dispatch => {
 		})
 		.catch(e => {
 			console.log(e)
+		})
+}
+
+export const addTask = (form) => dispatch => {
+	axios.put(`/task/${localStorage.getItem('session')}`, form)
+		.then(res => {
+			dispatch({
+				type: ADD_TASK,
+				payload: {
+					task: form,
+				}
+			})
+		})
+		.catch(e => {
+			console.log(e);
 		})
 }
 
