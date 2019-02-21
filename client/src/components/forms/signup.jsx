@@ -18,12 +18,12 @@ class SignUp extends Component {
 			modal: false,
 			form: {
 				name: {
-					first: 'a',
-					last: 'b',
+					first: '',
+					last: '',
 				},
-				email: '6@gmail.com',
-				password: 'password',
-				password1: 'password',
+				email: '',
+				password: '',
+				password1: '',
 			}
 		}
 	}
