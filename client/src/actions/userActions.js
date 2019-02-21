@@ -5,6 +5,7 @@ export const SIGN_UP = 'SIGN_UP';
 export const SIGN_OUT = 'SIGN_OUT';
 export const GET_TASKS = 'GET_TASKS';
 export const ADD_TASK = 'ADD_TASK';
+export const DELETE_TASK = 'DELETE_TASK';
 export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
 
 export const signUp = form => dispatch => {
@@ -73,10 +74,11 @@ export const signOut = session => dispatch => {
 export const getTasks = () => dispatch => {
 	axios.get(`/task/${localStorage.getItem('session')}`)
 		.then(res => {
-			//console.log(res.data.tasks);
 			dispatch({
 				type: GET_TASKS,
-				payload: { tasks: res.data.tasks }
+				payload: {
+					tasks: res.data.tasks
+				}
 			})
 
 			return res.data.tasks;
@@ -101,11 +103,23 @@ export const addTask = (form) => dispatch => {
 		})
 }
 
-export const toggleComplete = (task, i) => dispatch => {
+export const deleteTask = (task, i) => dispatch => {
+	axios.delete(`/task/${localStorage.getItem('session')}/${task._id}`)
 	dispatch({
-		type:TOGGLE_COMPLETE,
+		type: DELETE_TASK,
 		payload: {
-			task:{
+			task,
+			i: i
+		}
+	})
+}
+
+export const toggleComplete = (task, i) => dispatch => {
+	axios.post(`/task/${localStorage.getItem('session')}/${task._id}`, task)
+	dispatch({
+		type: TOGGLE_COMPLETE,
+		payload: {
+			task: {
 				...task,
 				completed: !task.completed
 			},

@@ -4,7 +4,8 @@ import {
 	SIGN_UP,
 	GET_TASKS,
 	ADD_TASK,
-	TOGGLE_COMPLETE
+	TOGGLE_COMPLETE,
+	DELETE_TASK
 } from '../actions/userActions';
 
 const initialState = {
@@ -44,6 +45,15 @@ export default (state = initialState, action) => {
 					...state.tasks,
 					action.payload.task
 				]
+			}
+		}
+		case DELETE_TASK: {
+			return {
+				...state,
+				tasks: state.tasks.filter((task, i) => {
+					if (i != action.payload.i)
+						return task
+				})
 			}
 		}
 		case TOGGLE_COMPLETE: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { touch, getTasks, toggleComplete } from '../../actions/userActions';
+import { touch, getTasks, toggleComplete, deleteTask } from '../../actions/userActions';
 import { connect } from 'react-redux';
 import {
 	Table,
@@ -39,6 +39,10 @@ class TaskTable extends Component {
 			}
 	}
 
+	deleteTask = e => {
+		this.props.deleteTask(this.props.tasks[e.target.name], e.target.name);
+	}
+
 	globalCheck = e => {
 		console.log(this.state);
 		this.setState({ globalCheck: !this.state.globalCheck })
@@ -62,7 +66,11 @@ class TaskTable extends Component {
 					{this.props.tasks.map((task, i) => {
 						return (
 							<tr key={"row" + i}>
-								<td><button className="delete-button" name={i}>X</button> </td>
+								<td><button
+									className="delete-button"
+									name={i}
+									onClick={this.deleteTask}>X
+								</button> </td>
 								<td>
 									<button
 										className={this.className(task)}
@@ -83,4 +91,4 @@ class TaskTable extends Component {
 
 
 
-export default connect(null, { touch, getTasks, toggleComplete })(TaskTable);
+export default connect(null, { touch, getTasks, toggleComplete, deleteTask })(TaskTable);
