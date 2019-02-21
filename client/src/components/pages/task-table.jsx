@@ -49,6 +49,7 @@ class TaskTable extends Component {
 	}
 
 	render() {
+		const {page, maxCount, tasks} = this.props;
 		return (
 			<Table borderless striped dark hover id="task-table">
 				<thead>
@@ -63,7 +64,7 @@ class TaskTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{this.props.tasks.map((task, i) => {
+					{tasks.slice( (page-1)*maxCount, Math.min(page*maxCount, tasks.length) ).map((task, i) => {
 						return (
 							<tr key={"row" + i}>
 								<td><button

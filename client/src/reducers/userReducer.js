@@ -5,12 +5,16 @@ import {
 	GET_TASKS,
 	ADD_TASK,
 	TOGGLE_COMPLETE,
-	DELETE_TASK
+	DELETE_TASK,
+	NEXT,
+	PREV
 } from '../actions/userActions';
 
 const initialState = {
 	session: '',
 	tasks: [],
+	maxCount: 10,
+	page: 1,
 	touch: false
 };
 
@@ -64,6 +68,18 @@ export default (state = initialState, action) => {
 						task.completed = !task.completed
 					return task;
 				}),
+			}
+		}
+		case NEXT: {
+			return {
+				...state,
+				page: state.page + 1
+			}
+		}
+		case PREV: {
+			return {
+				...state,
+				page: state.page - 1
 			}
 		}
 		default:

@@ -46,27 +46,33 @@ body {
   height: 100%;
 }
 
-#task-button-panel {
-   margin-top: 5%;
+#task-panel {
+  margin-top: 5%;
   margin-bottom: 1%;
   margin-left: 5%;
   display:inline-block;
   width: 50%
 }
 
-#task-button-panel > *:not(:first-child) {
+#task-panel > * {
+  display:inline-block;
+}
+
+#display-panel {
+  position: absolute;
+  right: 5%;
+  width: 275px;
+}
+
+#display-panel > * {
   margin-left: 1%;
+  display: inline-block;
+
 }
 
 #display-count{
-  position: relative;
-  left: 15%;
   color: white;
 
-}
-
-#task-panel div {
-  display:inline-block;
 }
 
 #task-table{

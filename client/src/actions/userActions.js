@@ -7,6 +7,8 @@ export const GET_TASKS = 'GET_TASKS';
 export const ADD_TASK = 'ADD_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
+export const NEXT = 'NEXT';
+export const PREV = 'PREV';
 
 export const signUp = form => dispatch => {
 	console.log('inside signup action reducer');
@@ -126,6 +128,10 @@ export const toggleComplete = (task, i) => dispatch => {
 			i: i
 		}
 	})
+}
+
+export const modifyPage = (type) => dispatch => {
+	dispatch({type})
 }
 
 export const touch = () => dispatch => {
