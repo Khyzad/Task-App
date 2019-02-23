@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import TaskTable from './task-table';
 import AddTask from './add-task';
 import {
-	Button
+	Button,
+	Spinner
 } from 'reactstrap';
 
 
@@ -14,7 +15,7 @@ class Dashboard extends Component {
 
 		this.state = {
 			globalCheck: false,
-			tasks: props.tasks
+			tasks: props.tasks,
 		}
 	}
 
@@ -40,20 +41,24 @@ class Dashboard extends Component {
 	}
 
 	render() {
-		const { page, maxCount, tasks } = this.props;
+		const { page, maxCount, tasks, idle } = this.props;
 		return (
 			<div id="dashboard">
 				<div>
 					<div id="task-panel">
 						<AddTask />
+						{idle ?
+							<span id="synched">Synched</span>
+							: <Spinner color="warning" hidden={idle} />
+						}
 						<div id="display-panel">
-							<div id="display-count">Showing {maxCount * (page - 1) + 1}-{Math.min(page*maxCount, tasks.length)} of {tasks.length}</div>
+							<div id="display-count">Showing {maxCount * (page - 1) + 1}-{Math.min(page * maxCount, tasks.length)} of {tasks.length}</div>
 							<Button name={PREV} onClick={this.clickPageButton}>Prev</Button>
 							<Button name={NEXT} onClick={this.clickPageButton}>Next</Button>
 						</div>
 
 					</div>
-					<TaskTable tasks={tasks} maxCount={maxCount} page={page} />
+					<TaskTable tasks={tasks} maxCount={maxCount} page={page} idle={idle} />
 				</div>
 			</div>
 		);
@@ -64,7 +69,8 @@ const mapStateToProps = (state) => {
 	return {
 		tasks: state.user.tasks,
 		maxCount: state.user.maxCount,
-		page: state.user.page
+		page: state.user.page,
+		idle: state.user.idle
 	}
 }
 

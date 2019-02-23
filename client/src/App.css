@@ -12,6 +12,11 @@ body {
   align-items: center
 }
 
+table thead tr *{
+  font-weight: bold;
+  font-size: large;
+}
+
 .delete-button {
   background-color: transparent;
   color: Red;
@@ -56,6 +61,14 @@ body {
 
 #task-panel > * {
   display:inline-block;
+}
+
+#task-panel > *:not(:first-child){
+  margin-left: 1%
+}
+
+#synched {
+  color: green
 }
 
 #display-panel {

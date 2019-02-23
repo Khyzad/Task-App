@@ -7,7 +7,9 @@ import {
 	TOGGLE_COMPLETE,
 	DELETE_TASK,
 	NEXT,
-	PREV
+	PREV,
+	ACKNOWLEDGE,
+	ACTIVE,
 } from '../actions/userActions';
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
 	tasks: [],
 	maxCount: 10,
 	page: 1,
+	idle: true,
 	touch: false
 };
 
@@ -39,21 +42,24 @@ export default (state = initialState, action) => {
 		case GET_TASKS: {
 			return {
 				...state,
+				idle: true,
 				tasks: action.payload.tasks
 			}
 		}
 		case ADD_TASK: {
 			return {
 				...state,
+				idle: true,
 				tasks: [
 					...state.tasks,
-					action.payload.task
+					action.payload.task,
 				]
 			}
 		}
 		case DELETE_TASK: {
 			return {
 				...state,
+				idle: false,
 				tasks: state.tasks.filter((task, i) => {
 					if (i != action.payload.i)
 						return task
@@ -63,6 +69,7 @@ export default (state = initialState, action) => {
 		case TOGGLE_COMPLETE: {
 			return {
 				...state,
+				idle: false,
 				tasks: state.tasks.map((task,i) => {
 					if (i == action.payload.i)
 						task.completed = !task.completed
@@ -80,6 +87,18 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				page: state.page - 1
+			}
+		}
+		case ACKNOWLEDGE: {
+			return{
+				...state,
+				idle: true
+			}
+		}
+		case ACTIVE: {
+			return{
+				...state,
+				idle: false
 			}
 		}
 		default:

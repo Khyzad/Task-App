@@ -9,6 +9,8 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
+export const ACKNOWLEDGE = 'ACKNOWLEDGE';
+export const ACTIVE = 'ACTIVE';
 
 export const signUp = form => dispatch => {
 	console.log('inside signup action reducer');
@@ -74,6 +76,7 @@ export const signOut = session => dispatch => {
 }
 
 export const getTasks = () => dispatch => {
+	active(dispatch);
 	axios.get(`/task/${localStorage.getItem('session')}`)
 		.then(res => {
 			dispatch({
@@ -91,6 +94,7 @@ export const getTasks = () => dispatch => {
 }
 
 export const addTask = (form) => dispatch => {
+	active(dispatch);
 	axios.put(`/task/${localStorage.getItem('session')}`, form)
 		.then(res => {
 			dispatch({
@@ -107,6 +111,7 @@ export const addTask = (form) => dispatch => {
 
 export const deleteTask = (task, i) => dispatch => {
 	axios.delete(`/task/${localStorage.getItem('session')}/${task._id}`)
+		.then(res => acknowledge(dispatch));
 	dispatch({
 		type: DELETE_TASK,
 		payload: {
@@ -118,6 +123,7 @@ export const deleteTask = (task, i) => dispatch => {
 
 export const toggleComplete = (task, i) => dispatch => {
 	axios.post(`/task/${localStorage.getItem('session')}/${task._id}`, task)
+		.then(res => acknowledge(dispatch));
 	dispatch({
 		type: TOGGLE_COMPLETE,
 		payload: {
@@ -131,10 +137,17 @@ export const toggleComplete = (task, i) => dispatch => {
 }
 
 export const modifyPage = (type) => dispatch => {
-	dispatch({type})
+	dispatch({ type })
 }
 
 export const touch = () => dispatch => {
 	dispatch({ type: '' })
 }
 
+
+const acknowledge = dispatch => {
+	dispatch({ type: ACKNOWLEDGE })
+}
+const active = dispatch => {
+	dispatch({ type: ACTIVE })
+}
