@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { touch, getTasks, toggleComplete, deleteTask } from '../../actions/userActions';
+import Task from './task';
 import { connect } from 'react-redux';
 import {
 	Table,
@@ -10,37 +11,9 @@ class TaskTable extends Component {
 		super(props)
 
 		this.state = {
+			tasks: props.tasks,
 			globalCheck: false,
 		}
-	}
-
-	toggleComplete = e => {
-		this.props.toggleComplete(this.props.tasks[e.target.name], e.target.name);
-	}
-
-	className = (task) => {
-		if (task.completed)
-			return "completed-button"
-		else
-			return "inprogress-button"
-	}
-
-	value = task => {
-		if (task.completed)
-			return "✓"
-		else
-			return "O"
-	}
-
-	strike = task => {
-		if (task.completed)
-			return {
-				textDecoration: 'line-through red'
-			}
-	}
-
-	deleteTask = e => {
-		this.props.deleteTask(this.props.tasks[e.target.name], e.target.name);
 	}
 
 	globalCheck = e => {
@@ -48,8 +21,21 @@ class TaskTable extends Component {
 		this.setState({ globalCheck: !this.state.globalCheck })
 	}
 
+	componentDidUpdate(props) {
+		console.log(props)
+		if (this.state.tasks !== props.tasks)
+			this.setState({ tasks: props.tasks })
+	}
+
+	x = (page, maxCount, tasks) => {
+		tasks.slice((page - 1) * maxCount, Math.min(page * maxCount, tasks.length))
+			.map((task, i) => {
+				return <Task key={task._id} task={task} i={i} />
+			})
+	}
+
 	render() {
-		const {page, maxCount, tasks} = this.props;
+		let { page, maxCount, tasks } = this.props;
 		return (
 			<Table borderless striped dark hover id="task-table">
 				<thead>
@@ -64,26 +50,13 @@ class TaskTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-					{tasks.slice( (page-1)*maxCount, Math.min(page*maxCount, tasks.length) ).map((task, i) => {
-						return (
-							<tr key={"row" + i}>
-								<td><button
-									className="delete-button"
-									name={i}
-									onClick={this.deleteTask}>X
-								</button> </td>
-								<td>
-									<button
-										className={this.className(task)}
-										name={i}
-										onClick={this.toggleComplete}>
-										{this.value(task)}
-									</button>
-								</td>
-								<td onDoubleClick={this.doubleclick} style={this.strike(task)}>{task.title}</td>
-							</tr>
-						);
-					})}
+					{
+						//this.x
+						tasks.slice((page - 1) * maxCount, Math.min(page * maxCount, tasks.length))
+							.map((task, i) => {
+								return <Task key={task._id} task={task} i={i} />
+							})
+					}
 				</tbody>
 			</Table>
 		)
