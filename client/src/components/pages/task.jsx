@@ -14,8 +14,7 @@ class Task extends Component {
 		console.log(props.task)
 
 		this.state = {
-			task: props.task,
-			i: props.i,
+			completed: props.task.completed,
 			globalCheck: false,
 		}
 	}
@@ -53,15 +52,15 @@ class Task extends Component {
 
 	}
 
-	componentDidUpdate(props) {
-		console.log(props)
-		if (this.state.task !== props.task)
-			this.setState({task: props.task})
+	componentWillReceiveProps(nextProps) {
+		console.log(nextProps);
+		if (nextProps.task.completed !== this.props.task.completed)
+			this.setState({completed: this.props.task.completed})
 	}
 
 
 	render() {
-		const { task, i } = this.state//props;
+		const { task, i } = this.props;
 		return (
 			<tr key = {"row" + i} >
 				<td>

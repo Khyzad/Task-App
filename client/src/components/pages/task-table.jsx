@@ -27,15 +27,9 @@ class TaskTable extends Component {
 			this.setState({ tasks: props.tasks })
 	}
 
-	x = (page, maxCount, tasks) => {
-		tasks.slice((page - 1) * maxCount, Math.min(page * maxCount, tasks.length))
-			.map((task, i) => {
-				return <Task key={task._id} task={task} i={i} />
-			})
-	}
-
 	render() {
 		let { page, maxCount, tasks } = this.props;
+		console.log('rendered')
 		return (
 			<Table borderless striped dark hover id="task-table">
 				<thead>
@@ -51,10 +45,9 @@ class TaskTable extends Component {
 				</thead>
 				<tbody>
 					{
-						//this.x
 						tasks.slice((page - 1) * maxCount, Math.min(page * maxCount, tasks.length))
 							.map((task, i) => {
-								return <Task key={task._id} task={task} i={i} />
+								return <Task key={task._id} task={task} completed={task.completed} i={i} />
 							})
 					}
 				</tbody>
@@ -64,5 +57,11 @@ class TaskTable extends Component {
 }
 
 
+const mapStateToProps = (state) => {
+	return {
+		tasks: state.user.tasks,
+	}
+}
 
-export default connect(null, { touch, getTasks, toggleComplete, deleteTask })(TaskTable);
+
+export default connect(mapStateToProps, { touch, getTasks, toggleComplete, deleteTask })(TaskTable);

@@ -15,7 +15,6 @@ class Dashboard extends Component {
 
 		this.state = {
 			globalCheck: false,
-			tasks: props.tasks,
 		}
 	}
 
@@ -32,16 +31,16 @@ class Dashboard extends Component {
 	}
 
 	clickPageButton = e => {
-		const { page, maxCount, tasks } = this.props;
+		const { page, maxCount, length } = this.props;
 		const name = e.target.name
-		if (name == NEXT && Math.trunc(tasks.length / maxCount) + 1 > page
+		if (name == NEXT && Math.trunc(length / maxCount) + 1 > page
 			|| name == PREV && page > 1)
 			this.props.modifyPage(name);
 
 	}
 
 	render() {
-		const { page, maxCount, tasks, idle } = this.props;
+		const { page, maxCount, length, idle } = this.props;
 		return (
 			<div id="dashboard">
 				<div>
@@ -52,13 +51,13 @@ class Dashboard extends Component {
 							: <Spinner color="warning" hidden={idle} />
 						}
 						<div id="display-panel">
-							<div id="display-count">Showing {maxCount * (page - 1) + 1}-{Math.min(page * maxCount, tasks.length)} of {tasks.length}</div>
+							<div id="display-count">Showing {maxCount * (page - 1) + 1}-{Math.min(page * maxCount, length)} of {length}</div>
 							<Button name={PREV} onClick={this.clickPageButton}>Prev</Button>
 							<Button name={NEXT} onClick={this.clickPageButton}>Next</Button>
 						</div>
 
 					</div>
-					<TaskTable tasks={tasks} maxCount={maxCount} page={page} idle={idle} />
+					<TaskTable maxCount={maxCount} page={page} idle={idle} />
 				</div>
 			</div>
 		);
@@ -67,7 +66,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		tasks: state.user.tasks,
+		length: state.user.tasks.length,
 		maxCount: state.user.maxCount,
 		page: state.user.page,
 		idle: state.user.idle
