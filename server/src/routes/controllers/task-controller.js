@@ -27,7 +27,8 @@ exports.addTask = async (req, res) => {
 		console.log('found user')
 		if (user) {
 			user.tasks.push({
-				title: req.body.title
+				title: req.body.title,
+				description: req.body.description
 			})
 
 			await user.save();
