@@ -26,7 +26,6 @@ class EditTask extends Component {
 	}
 
 	onchange = e => {
-		console.log(e.target);
 		this.setState({
 			task: {
 				...this.state.task,
@@ -37,7 +36,6 @@ class EditTask extends Component {
 
 	onsubmit = e => {
 		e.preventDefault();
-		console.log(this.state.task)
 		this.props.updateTask(this.state.task)
 		this.props.toggleEdit();
 	}
