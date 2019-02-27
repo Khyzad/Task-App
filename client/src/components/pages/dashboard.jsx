@@ -49,7 +49,7 @@ class Dashboard extends Component {
 						<AddTask />
 						{idle ?
 							<span id="synched">Synched</span>
-							: <Spinner color="warning" hidden={idle} />
+							: <Spinner size="sm" color="warning" hidden={idle} />
 						}
 						<div id="display-panel">
 							<div id="display-count">Showing {maxCount * (page - 1) + 1}-{Math.min(page * maxCount, length)} of {length}</div>
