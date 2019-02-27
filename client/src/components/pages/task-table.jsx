@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getTasks, toggleComplete, deleteTask } from '../../actions/tasksActions';
+import { getTasks, updateTask, deleteTask } from '../../actions/tasksActions';
 import Task from './task';
 import { connect } from 'react-redux';
 import {
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { getTasks, toggleComplete, deleteTask })(TaskTable);
+export default connect(mapStateToProps, { getTasks, updateTask, deleteTask })(TaskTable);

@@ -1,7 +1,7 @@
 import {
 	GET_TASKS,
 	ADD_TASK,
-	TOGGLE_COMPLETE,
+	UPDATE_TASK,
 	DELETE_TASK,
 	NEXT,
 	PREV,
@@ -54,16 +54,13 @@ export default (state = initialState, action) => {
 				list
 			}
 		}
-		case TOGGLE_COMPLETE: {
+		case UPDATE_TASK: {
 			return {
 				...state,
 				idle: true,
 				list: {
 					...state.list,
-					[action.payload.task._id]: {
-						...action.payload.task,
-						completed: action.payload.task.completed
-					}
+					[action.payload.task._id]: action.payload.task
 				}
 			}
 		}

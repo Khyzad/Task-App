@@ -3,7 +3,7 @@ import axios from 'axios';
 export const GET_TASKS = 'GET_TASKS';
 export const ADD_TASK = 'ADD_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
-export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
+export const UPDATE_TASK = 'UPDATE_TASK';
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
 export const ACTIVE = 'ACTIVE';
@@ -58,13 +58,13 @@ export const deleteTask = (task, i) => dispatch => {
 		});
 }
 
-export const toggleComplete = task => dispatch => {
+export const updateTask = task => dispatch => {
 	active(dispatch);
 
 	axios.post(`/task/${localStorage.getItem('session')}/${task._id}`, task)
 		.then(res => {
 			dispatch({
-				type: TOGGLE_COMPLETE,
+				type: UPDATE_TASK,
 				payload: {
 					task
 				}

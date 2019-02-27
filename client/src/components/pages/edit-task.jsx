@@ -1,0 +1,68 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { updateTask } from '../../actions/tasksActions'
+import {
+	Modal,
+	Form,
+	ModalBody,
+	ModalHeader,
+	ModalFooter,
+	Input,
+	Button,
+} from 'reactstrap'
+
+class EditTask extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			task: this.props.task
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.edit !== this.props.edit)
+			this.setState({ edit: this.props.edit })
+	}
+
+	onchange = e => {
+		console.log(e.target);
+		this.setState({
+			task: {
+				...this.state.task,
+				[e.target.name]: e.target.value
+			}
+		})
+	}
+
+	onsubmit = e => {
+		e.preventDefault();
+		console.log(this.state.task)
+		this.props.updateTask(this.state.task)
+		this.props.toggleEdit();
+	}
+
+	render() {
+		const { edit, toggleEdit } = this.props;
+		return (
+			<Modal isOpen={edit}>
+				<Form onSubmit={this.onsubmit}>
+					<ModalHeader toggle={toggleEdit}>
+						Edit Task
+					</ModalHeader>
+					<ModalBody>
+						Title:
+						<Input onChange={this.onchange} name="title" type="text" value={this.state.task.title} />
+						Description:
+						<Input onChange={this.onchange} name="description" type="textarea" value={this.state.task.description} />
+					</ModalBody>
+					<ModalFooter>
+						<Button>Edit</Button>
+					</ModalFooter>
+				</Form>
+			</Modal>
+		)
+	}
+}
+
+export default connect(null, { updateTask })(EditTask);

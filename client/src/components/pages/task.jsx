@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {
 	getTasks,
-	toggleComplete,
+	updateTask,
 	deleteTask
 } from '../../actions/tasksActions';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import EditTask from './edit-task';
 
 class Task extends Component {
 	constructor(props) {
@@ -13,6 +14,7 @@ class Task extends Component {
 		this.state = {
 			completed: props.task.completed,
 			globalCheck: false,
+			edit: false,
 		}
 	}
 
@@ -24,7 +26,11 @@ class Task extends Component {
 	}
 
 	toggleComplete = e => {
-		this.props.toggleComplete({...this.props.task, completed: !this.props.task.completed});
+		this.props.updateTask({ ...this.props.task, completed: !this.props.task.completed });
+	}
+
+	toggleEdit = e => {
+		this.setState({edit: !this.state.edit})
 	}
 
 	deleteTask = e => {
@@ -46,19 +52,19 @@ class Task extends Component {
 	}
 
 	doubleclick = e => {
-
+		this.setState({edit: !this.state.edit})
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.task.completed !== this.props.task.completed)
-			this.setState({completed: this.props.task.completed})
+			this.setState({ completed: this.props.task.completed })
 	}
 
 
 	render() {
 		const { task, i } = this.props;
 		return (
-			<tr key = {"row" + i} >
+			<tr key={"row" + i} >
 				<td>
 					<button
 						className="delete-button"
@@ -75,10 +81,11 @@ class Task extends Component {
 				<td onDoubleClick={this.doubleclick}
 					style={this.strike(task)}>
 					{task.title}
+					<EditTask toggleEdit={this.toggleEdit} edit={this.state.edit} task={this.props.task} />
 				</td>
 			</tr>
 		)
 	}
 }
 
-export default connect(null, { getTasks, toggleComplete, deleteTask })(Task)
+export default connect(null, { getTasks, updateTask, deleteTask })(Task)
