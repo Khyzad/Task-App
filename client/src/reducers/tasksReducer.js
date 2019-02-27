@@ -5,7 +5,6 @@ import {
 	DELETE_TASK,
 	NEXT,
 	PREV,
-	ACKNOWLEDGE
 } from '../actions/tasksActions';
 
 const initialState = {
@@ -49,7 +48,7 @@ export default (state = initialState, action) => {
 
 			return {
 				...state,
-				idle: false,
+				idle: true,
 				length: state.length - 1,
 				list
 			}
@@ -57,12 +56,12 @@ export default (state = initialState, action) => {
 		case TOGGLE_COMPLETE: {
 			return {
 				...state,
-				idle: false,
+				idle: true,
 				list: {
 					...state.list,
 					[action.payload.task._id]: {
 						...action.payload.task,
-						completed: !action.payload.task.completed
+						completed: action.payload.task.completed
 					}
 				}
 			}
@@ -79,14 +78,6 @@ export default (state = initialState, action) => {
 				page: state.page - 1
 			}
 		}
-		case ACKNOWLEDGE:{
-			return{
-				...state,
-				idle: true,
-			}
-		}
-
-
 		default:
 			return {
 				...state,

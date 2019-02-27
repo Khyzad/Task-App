@@ -6,11 +6,6 @@ import {
 
 const initialState = {
 	session: '',
-	tasks: [],
-	maxCount: 10,
-	page: 1,
-	idle: true,
-	touch: false
 };
 
 export default (state = initialState, action) => {
@@ -34,7 +29,6 @@ export default (state = initialState, action) => {
 		default:
 			return {
 				...state,
-				touch: !state.touch
 			};
 	}
 }

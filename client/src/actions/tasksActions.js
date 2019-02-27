@@ -6,7 +6,6 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
 export const NEXT = 'NEXT';
 export const PREV = 'PREV';
-export const ACKNOWLEDGE = 'ACKNOWLEDGE';
 export const ACTIVE = 'ACTIVE';
 
 export const getTasks = () => dispatch => {
@@ -45,41 +44,38 @@ export const addTask = (form) => dispatch => {
 }
 
 export const deleteTask = (task, i) => dispatch => {
+	active(dispatch);
+
 	axios.delete(`/task/${localStorage.getItem('session')}/${task._id}`)
-		.then(res => acknowledge(dispatch));
-	dispatch({
-		type: DELETE_TASK,
-		payload: {
-			task,
-			i: i
-		}
-	})
+		.then(res => {
+			dispatch({
+				type: DELETE_TASK,
+				payload: {
+					task,
+					i: i
+				}
+			})
+		});
 }
 
 export const toggleComplete = task => dispatch => {
-	axios.post(`/task/${localStorage.getItem('session')}/${task._id}`, task)
-		.then(res => acknowledge(dispatch));
+	active(dispatch);
 
-	dispatch({
-		type: TOGGLE_COMPLETE,
-		payload: {
-			task
-		}
-	})
+	axios.post(`/task/${localStorage.getItem('session')}/${task._id}`, task)
+		.then(res => {
+			dispatch({
+				type: TOGGLE_COMPLETE,
+				payload: {
+					task
+				}
+			})
+		});
 }
 
 export const modifyPage = (type) => dispatch => {
 	dispatch({ type })
 }
 
-export const touch = () => dispatch => {
-	dispatch({ type: '' })
-}
-
-
-const acknowledge = dispatch => {
-	dispatch({ type: ACKNOWLEDGE })
-}
 const active = dispatch => {
 	dispatch({ type: ACTIVE })
 }

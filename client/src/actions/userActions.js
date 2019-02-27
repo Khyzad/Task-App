@@ -3,14 +3,6 @@ import axios from 'axios';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_OUT = 'SIGN_OUT';
-export const GET_TASKS = 'GET_TASKS';
-export const ADD_TASK = 'ADD_TASK';
-export const DELETE_TASK = 'DELETE_TASK';
-export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
-export const NEXT = 'NEXT';
-export const PREV = 'PREV';
-export const ACKNOWLEDGE = 'ACKNOWLEDGE';
-export const ACTIVE = 'ACTIVE';
 
 export const signUp = form => dispatch => {
 	console.log('inside signup action reducer');

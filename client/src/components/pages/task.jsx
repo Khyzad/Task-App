@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-	touch,
 	getTasks,
 	toggleComplete,
 	deleteTask
@@ -25,11 +24,11 @@ class Task extends Component {
 	}
 
 	toggleComplete = e => {
-		this.props.toggleComplete(this.props.task, this.props.i);
+		this.props.toggleComplete({...this.props.task, completed: !this.props.task.completed});
 	}
 
 	deleteTask = e => {
-		this.props.deleteTask(this.props.task, this.props.i);
+		this.props.deleteTask(this.props.task);
 	}
 
 	value = task => {
@@ -84,4 +83,4 @@ class Task extends Component {
 	}
 }
 
-export default connect(null, { touch, getTasks, toggleComplete, deleteTask })(Task)
+export default connect(null, { getTasks, toggleComplete, deleteTask })(Task)

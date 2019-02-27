@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { touch, getTasks, modifyPage, NEXT, PREV } from '../../actions/tasksActions';
+import { getTasks, modifyPage, NEXT, PREV } from '../../actions/tasksActions';
 import { connect } from 'react-redux';
 import TaskTable from './task-table';
 import AddTask from './add-task';
@@ -74,4 +74,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, { touch, getTasks, modifyPage, NEXT, PREV })(Dashboard);
+export default connect(mapStateToProps, { getTasks, modifyPage, NEXT, PREV })(Dashboard);
