@@ -44,7 +44,7 @@ class TaskTable extends Component {
 					{
 						tasks.slice((page - 1) * maxCount, Math.min(page * maxCount, tasks.length))
 							.map((task, i) => {
-								return <Task key={task._id} task={task} completed={task.completed} i={i} />
+								return <Task key={task._id} task={task} i={i} />
 							})
 					}
 				</tbody>

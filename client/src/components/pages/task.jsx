@@ -62,14 +62,12 @@ class Task extends Component {
 				<td>
 					<button
 						className="delete-button"
-						name={i}
 						onClick={this.deleteTask}>X
 					</button>
 				</td>
 				<td>
 					<button
 						className={this.className(task)}
-						name={i}
 						onClick={this.toggleComplete}>
 						{this.value(task)}
 					</button>
