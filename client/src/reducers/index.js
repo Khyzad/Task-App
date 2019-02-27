@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import bookReducer from './bookReducer';
 import userReducer from './userReducer';
+import tasksReducer from './tasksReducer';
 
 export default combineReducers({
-   //book: bookReducer,
    user: userReducer,
+   tasks: tasksReducer,
 })

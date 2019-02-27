@@ -32,7 +32,8 @@ exports.addTask = async (req, res) => {
 
 			await user.save();
 
-			res.status(201).json({})
+			console.log(user);
+			res.status(201).json({task: user.tasks[user.tasks.length - 1]})
 		}
 
 	} catch (e) {

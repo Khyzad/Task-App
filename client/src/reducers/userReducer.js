@@ -39,68 +39,6 @@ export default (state = initialState, action) => {
 				tasks: []
 			}
 		}
-		case GET_TASKS: {
-			return {
-				...state,
-				idle: true,
-				tasks: action.payload.tasks
-			}
-		}
-		case ADD_TASK: {
-			return {
-				...state,
-				idle: true,
-				tasks: [
-					...state.tasks,
-					action.payload.task,
-				]
-			}
-		}
-		case DELETE_TASK: {
-			return {
-				...state,
-				idle: false,
-				tasks: state.tasks.filter((task, i) => {
-					if (i != action.payload.i)
-						return task
-				})
-			}
-		}
-		case TOGGLE_COMPLETE: {
-			return {
-				...state,
-				idle: false,
-				tasks: state.tasks.map((task,i) => {
-					if (i == action.payload.i)
-						task.completed = !task.completed
-					return task;
-				}),
-			}
-		}
-		case NEXT: {
-			return {
-				...state,
-				page: state.page + 1
-			}
-		}
-		case PREV: {
-			return {
-				...state,
-				page: state.page - 1
-			}
-		}
-		case ACKNOWLEDGE: {
-			return{
-				...state,
-				idle: true
-			}
-		}
-		case ACTIVE: {
-			return{
-				...state,
-				idle: false
-			}
-		}
 		default:
 			return {
 				...state,

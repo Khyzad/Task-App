@@ -4,14 +4,12 @@ import {
 	getTasks,
 	toggleComplete,
 	deleteTask
-} from '../../actions/userActions';
+} from '../../actions/tasksActions';
 import { connect } from 'react-redux'
 
 class Task extends Component {
 	constructor(props) {
 		super(props)
-
-		console.log(props.task)
 
 		this.state = {
 			completed: props.task.completed,
@@ -53,7 +51,6 @@ class Task extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps);
 		if (nextProps.task.completed !== this.props.task.completed)
 			this.setState({completed: this.props.task.completed})
 	}

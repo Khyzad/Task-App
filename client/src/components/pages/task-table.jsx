@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { touch, getTasks, toggleComplete, deleteTask } from '../../actions/userActions';
+import { touch, getTasks, toggleComplete, deleteTask } from '../../actions/tasksActions';
 import Task from './task';
 import { connect } from 'react-redux';
 import {
@@ -17,19 +17,16 @@ class TaskTable extends Component {
 	}
 
 	globalCheck = e => {
-		console.log(this.state);
 		this.setState({ globalCheck: !this.state.globalCheck })
 	}
 
 	componentDidUpdate(props) {
-		console.log(props)
 		if (this.state.tasks !== props.tasks)
 			this.setState({ tasks: props.tasks })
 	}
 
 	render() {
 		let { page, maxCount, tasks } = this.props;
-		console.log('rendered')
 		return (
 			<Table borderless striped dark hover id="task-table">
 				<thead>
@@ -58,8 +55,9 @@ class TaskTable extends Component {
 
 
 const mapStateToProps = (state) => {
+
 	return {
-		tasks: state.user.tasks,
+		tasks: Object.keys(state.tasks.list).map(_id => (state.tasks.list[_id])),
 	}
 }
 

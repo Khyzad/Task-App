@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { touch, getTasks, modifyPage, NEXT, PREV } from '../../actions/userActions';
+import { touch, getTasks, modifyPage, NEXT, PREV } from '../../actions/tasksActions';
 import { connect } from 'react-redux';
 import TaskTable from './task-table';
 import AddTask from './add-task';
@@ -33,6 +33,7 @@ class Dashboard extends Component {
 	clickPageButton = e => {
 		const { page, maxCount, length } = this.props;
 		const name = e.target.name
+
 		if (name == NEXT && Math.trunc(length / maxCount) + 1 > page
 			|| name == PREV && page > 1)
 			this.props.modifyPage(name);
@@ -66,10 +67,10 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		length: state.user.tasks.length,
-		maxCount: state.user.maxCount,
-		page: state.user.page,
-		idle: state.user.idle
+		length: state.tasks.length,
+		maxCount: state.tasks.maxCount,
+		page: state.tasks.page,
+		idle: state.tasks.idle
 	}
 }
 
