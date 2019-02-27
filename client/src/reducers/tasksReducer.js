@@ -5,6 +5,7 @@ import {
 	DELETE_TASK,
 	NEXT,
 	PREV,
+	ACTIVE
 } from '../actions/tasksActions';
 
 const initialState = {
@@ -76,6 +77,12 @@ export default (state = initialState, action) => {
 			return{
 				...state,
 				page: state.page - 1
+			}
+		}
+		case ACTIVE: {
+			return{
+				...state,
+				idle: false
 			}
 		}
 		default:
