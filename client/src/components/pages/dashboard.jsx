@@ -34,8 +34,8 @@ class Dashboard extends Component {
 		const { page, maxCount, length } = this.props;
 		const name = e.target.name
 
-		if (name == NEXT && Math.trunc(length / maxCount) + 1 > page
-			|| name == PREV && page > 1)
+		if ((name == NEXT && length / maxCount > page)
+			|| (name == PREV && page > 1))
 			this.props.modifyPage(name);
 
 	}
