@@ -81,8 +81,11 @@ class Task extends Component {
 				<td onDoubleClick={this.doubleclick}
 					style={this.strike(task)}>
 					{task.title}
-					<EditTask toggleEdit={this.toggleEdit} edit={this.state.edit} task={this.props.task} />
 				</td>
+				<td onDoubleClick={this.doubleclick}>
+					{task.description}
+				</td>
+				<EditTask toggleEdit={this.toggleEdit} edit={this.state.edit} task={this.props.task} />
 			</tr>
 		)
 	}

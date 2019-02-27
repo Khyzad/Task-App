@@ -37,7 +37,8 @@ class TaskTable extends Component {
 						<th id="check-col" width="5%" >
 							<button className="completed-button">✓</button>
 						</th>
-						<th width="90%">Tasks</th>
+						<th width="30%">Title</th>
+						<th width="60%">Description</th>
 					</tr>
 				</thead>
 				<tbody>
