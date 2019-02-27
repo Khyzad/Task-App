@@ -2,14 +2,6 @@ import {
 	SIGN_IN,
 	SIGN_OUT,
 	SIGN_UP,
-	GET_TASKS,
-	ADD_TASK,
-	TOGGLE_COMPLETE,
-	DELETE_TASK,
-	NEXT,
-	PREV,
-	ACKNOWLEDGE,
-	ACTIVE,
 } from '../actions/userActions';
 
 const initialState = {
