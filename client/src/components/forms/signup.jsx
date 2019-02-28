@@ -19,8 +19,12 @@ class SignUp extends Component {
 			form: {
 				email: '',
 				password: '',
-				password1: '',
-			}
+				password2: '',
+			},
+			passwordMatch: true,
+			emailAvailable: true,
+			passwordFormat: true,
+			validEmail: true,
 		}
 	}
 
@@ -32,12 +36,28 @@ class SignUp extends Component {
 
 	submit = e => {
 		e.preventDefault();
-		if (this.state.password !== this.state.password1) {
-			console.log('error');
-		} else {
-			this.props.signUp(this.state.form)
-			this.toggle();
+		var passwordMatch = true, passwordFormat = true, validEmail = true;
+
+		if (this.state.form.password !== this.state.form.password2) {
+			passwordMatch = false;
 		}
+		if (this.state.form.password.length < 7) {
+			passwordFormat = false;
+		}
+		if (!this.state.form.email.match(/^\w+@\w+\.\w+$/)) {
+			validEmail = false;
+		}
+
+		if (passwordMatch && passwordFormat && validEmail) {
+			this.props.signUp(this.state.form, (err) => {
+				if (err)
+					this.setState({ emailAvailable: false })
+				else
+					this.toggle();
+			})
+		}
+
+		this.setState({ passwordMatch, passwordFormat, validEmail })
 	}
 
 	change = e => {
@@ -57,6 +77,34 @@ class SignUp extends Component {
 					<Form onSubmit={this.submit}>
 						<ModalHeader toggle={this.toggle}>Sign Up</ModalHeader>
 						<ModalBody>
+							{!this.state.emailAvailable &&
+								<div className="errors">
+									<span>• Email is unavailable</span>
+									<br />
+								</div>
+							}
+							{!this.state.validEmail &&
+								<div className="errors">
+									<span>• Email is invalid</span>
+									<br />
+								</div>
+							}
+							{!this.state.passwordMatch &&
+								<div className="errors">
+									<span>• Passwords do not match</span>
+									<br />
+								</div>
+							}
+							{!this.state.passwordFormat &&
+								<div className="errors">
+									<span>
+										• Password needs to contain at least 7 characters
+									</span>
+									<br />
+								</div>
+							}
+
+
 							Email:
 							<Input name='email' type='text' onChange={this.change} />
 							Password:
@@ -69,7 +117,7 @@ class SignUp extends Component {
 						</ModalFooter>
 					</Form>
 				</Modal>
-			</div>
+			</div >
 		)
 	}
 }

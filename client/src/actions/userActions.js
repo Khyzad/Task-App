@@ -4,7 +4,7 @@ export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_OUT = 'SIGN_OUT';
 
-export const signUp = form => dispatch => {
+export const signUp = (form, callback) => dispatch => {
 	console.log('inside signup action reducer');
 
 	axios.post('/user/signUp', form)
@@ -19,10 +19,12 @@ export const signUp = form => dispatch => {
 				}
 			})
 
-			window.location.reload();
+			callback(null);
 
+			window.location.reload();
 		}).catch(e => {
-			console.log(e)
+			// should perform different actions depending on status code and error message
+			callback(e);
 		})
 }
 

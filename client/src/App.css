@@ -10,6 +10,11 @@ body {
   height: 5vh
 }
 
+.errors {
+  color: red;
+  font-size: 12px;
+}
+
 #home {
   padding-top: 5%;
   padding-left: 5%;
