@@ -13,7 +13,7 @@ class SignOut extends Component {
 		return (
 			<div>
 				<form onSubmit={this.logout}>
-					<Button color="link">Sign out</Button>
+					<Button color="link" style={{color:'white'}}>Sign out</Button>
 				</form>
 			</div>
 		);

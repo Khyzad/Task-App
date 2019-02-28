@@ -1,15 +1,54 @@
 body {
+  height: 95vh;
+}
+
+#root {
   height: 100%;
+}
+
+#header {
+  height: 5vh
+}
+
+#home {
+  padding-top: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  height:100%;
+  background-color: rgb(10, 8, 19);
+  color: white;
+}
+
+#home-title{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+#home-description{
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 #nav-links span:hover{
   background-color:rgb(61, 61, 61)
 }
 
-#nav-links span{
+#nav-links {
+  position: relative;
+  float: right;
   display: flex;
   justify-content: center;
   align-items: center
+}
+
+#nav-links span{
+  display: inline-block;
+  height: 5vh;
+  text-align: 'center';
+	vertical-align: 'middle';
 }
 
 table thead tr *{
@@ -48,7 +87,7 @@ table thead tr *{
   position: absolute;
   background-color: rgb(10, 8, 19);
   width: 100%;
-  height: 100%;
+  height: 95vh;
 }
 
 #task-panel {

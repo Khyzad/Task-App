@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Header from './components/layouts/header'
 
-import About from './components/pages/about';
 import Home from './components/pages/home';
 import Dashboard from './components/pages/dashboard';
 
@@ -16,15 +15,14 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div>
+          <div style={{ height: "100%" }}>
             <Header />
             <Route exact path='/' render={props => <Home />} />
-            <Route path='/about' component={About} />
             <Route path='/dashboard' render={props =>
               (
                 localStorage.getItem('session') ? <Dashboard />
                   :
-                <Home />
+                  <Home />
               )
             } />
           </div>

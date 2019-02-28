@@ -3,29 +3,29 @@ import { Link } from 'react-router-dom';
 import SignUp from '../forms/signup';
 import SignIn from '../forms/signin';
 import SignOut from '../forms/signout';
+import { relative } from 'path';
+import { Button } from 'reactstrap';
 
 
 class Header extends Component {
 	render() {
 		return (
 			<header style={bannerStyle} id="header" >
-				<div style={titleStyle}>
-					<h1>Library App</h1>
-					<h4>A proof of concept</h4>
-				</div>
-				<section id="nav-links" style={navStyle}>
-					<span><Link to='/'>Home</Link></span>
-					{localStorage.getItem('session') ?
-						<span><SignOut /></span>
-						:
-						<span><SignIn /></span>
-					}
-					{localStorage.getItem('session') ?
-						<span><Link to='/dashboard'>Dashboard</Link></span>
-						:
-						<span><SignUp /></span>
-					}
-					<span><Link to='/about'>About</Link></span>
+
+				<section id="nav-bar" >
+					<div id="nav-links">
+						<span><Link to='/'><Button color="link" style={{color: 'white'}}>Home</Button></Link></span>
+						{localStorage.getItem('session') ?
+							<span><SignOut /></span>
+							:
+							<span><SignIn /></span>
+						}
+						{localStorage.getItem('session') ?
+							<span><Link to='/dashboard'><Button color="link" style={{color: 'white'}}>Dashboard</Button></Link></span>
+							:
+							<span><SignUp /></span>
+						}
+					</div>
 				</section>
 			</header>
 		)
@@ -33,25 +33,10 @@ class Header extends Component {
 }
 
 const bannerStyle = {
-	display: 'grid',
-	gridTemplateColumns: '3fr 1fr',
 	backgroundColor: '#161234',
 	color: '#f5f5f5',
 	borderBottomStyle: 'outset',
 	borderColor: 'rgb(29, 29, 29)'
-	// borderBottomColor: 'outset'
-}
-
-const titleStyle = {
-	padding: '20px 10px',
-}
-
-const navStyle = {
-	textAlign: 'center',
-	verticalAlign: 'middle',
-	paddingTop: '60px',
-	display: 'grid',
-	gridTemplateColumns: 'repeat(4, 1fr)'
 }
 
 export default Header;
