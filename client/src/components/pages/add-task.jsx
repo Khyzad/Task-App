@@ -15,6 +15,9 @@ class AddTask extends Component {
 	constructor(props) {
 		super(props);
 
+		this.titleLimit = 20;
+		this.descriptionLimit = 140;
+
 		this.state = {
 			modal: false,
 			form: {
@@ -24,17 +27,26 @@ class AddTask extends Component {
 		}
 	}
 
+	limit = name => {
+		if (name == 'title')
+			return this.titleLimit
+		if (name == 'description')
+			return this.descriptionLimit
+	}
+
 	toggle = e => {
 		this.setState({ modal: !this.state.modal });
 	}
 
 	change = e => {
-		this.setState({
-			form: {
-				...this.state.form,
-				[e.target.name]: e.target.value
-			}
-		});
+		if (this.limit(e.target.name) >= e.target.value.length) {
+			this.setState({
+				form: {
+					...this.state.form,
+					[e.target.name]: e.target.value
+				}
+			});
+		}
 	}
 
 	submit = e => {
@@ -55,9 +67,12 @@ class AddTask extends Component {
 						</ModalHeader>
 						<ModalBody>
 							Title:
-							<Input name="title" value={this.state.title} onChange={this.change} />
+							<Input name="title" value={this.state.form.title} onChange={this.change} />
+							<span>{this.state.form.title.length}/{this.titleLimit}</span>
+							<br />
 							Description:
-							<Input name="description" value={this.state.description} onChange={this.change} type="textarea" />
+							<Input name="description" value={this.state.form.description} onChange={this.change} type="textarea" />
+							<span>{this.state.form.description.length}/{this.descriptionLimit}</span>
 						</ModalBody>
 						<ModalFooter>
 							<Button>Submit</Button>
