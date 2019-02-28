@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 //import 'bulma/css/bulma.min.css'
 import { Provider } from 'react-redux';
@@ -20,7 +20,13 @@ class App extends Component {
             <Header />
             <Route exact path='/' render={props => <Home />} />
             <Route path='/about' component={About} />
-            <Route path='/dashboard' component={Dashboard} />
+            <Route path='/dashboard' render={props =>
+              (
+                localStorage.getItem('session') ? <Dashboard />
+                  :
+                <Home />
+              )
+            } />
           </div>
         </Router>
       </Provider>
