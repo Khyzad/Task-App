@@ -56,7 +56,7 @@ class SignUp extends Component {
 	render() {
 		return (
 			<div>
-				<Button onClick={this.toggle} color="link" style={{ color: 'white' }}>Sign Up</Button>
+				<Button onClick={this.toggle} color="link" style={{ color: 'white' }}>Sign up</Button>
 				<Modal isOpen={this.state.modal} toggle={this.toggle}>
 					<Form onSubmit={this.submit}>
 						<ModalHeader toggle={this.toggle}>Sign Up</ModalHeader>

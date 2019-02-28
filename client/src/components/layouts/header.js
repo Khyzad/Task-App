@@ -14,14 +14,16 @@ class Header extends Component {
 
 				<section id="nav-bar" >
 					<div id="nav-links">
-						<span><Link to='/'><Button color="link" style={{color: 'white'}}>Home</Button></Link></span>
+						<span><Link to='/'>
+							<Button color="link" style={{ color: 'white' }}>Home</Button>
+						</Link></span>
 						{localStorage.getItem('session') ?
 							<span><SignOut /></span>
 							:
 							<span><SignIn /></span>
 						}
 						{localStorage.getItem('session') ?
-							<span><Link to='/dashboard'><Button color="link" style={{color: 'white'}}>Dashboard</Button></Link></span>
+							<span><Link to='/dashboard'><Button color="link" style={{ color: 'white' }}>Dashboard</Button></Link></span>
 							:
 							<span><SignUp /></span>
 						}
