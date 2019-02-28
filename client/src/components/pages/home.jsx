@@ -6,8 +6,8 @@ class Home extends Component {
 			<section id="home">
 				<h1 id="home-title">Task Application</h1>
 				<div id="home-description">
-					On sign-up, the general-purpose application allows
-					users to record and complete tasks.
+					A simple to-do application. On sign-up, this application will allow
+					you to record and complete tasks.
 				</div>
 			</section>
 		);
