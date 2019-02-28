@@ -17,10 +17,6 @@ class SignUp extends Component {
 		this.state = {
 			modal: false,
 			form: {
-				name: {
-					first: '',
-					last: '',
-				},
 				email: '',
 				password: '',
 				password1: '',
@@ -61,16 +57,12 @@ class SignUp extends Component {
 					<Form onSubmit={this.submit}>
 						<ModalHeader toggle={this.toggle}>Sign Up</ModalHeader>
 						<ModalBody>
-							First Name:
-						<Input name='first-name' type='text' onChange={this.change} />
-							Last Name:
-						<Input name='last-name' type='text' onChange={this.change} />
 							Email:
-						<Input name='email' type='text' onChange={this.change} />
+							<Input name='email' type='text' onChange={this.change} />
 							Password:
-						<Input name='password' type='password' onChange={this.change} />
+							<Input name='password' type='password' onChange={this.change} />
 							Password Confirmation:
-						<Input name='password2' type='password' onChange={this.change} />
+							<Input name='password2' type='password' onChange={this.change} />
 						</ModalBody>
 						<ModalFooter>
 							<Button>Submit</Button>

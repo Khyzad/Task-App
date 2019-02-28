@@ -15,7 +15,6 @@ exports.signUp = async (req, res) => {
 
 			res.status(201).json({
 				session: session._id,
-				books: user.books
 			})
 		}
 	} catch (e) {

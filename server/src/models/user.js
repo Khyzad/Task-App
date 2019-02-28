@@ -2,13 +2,8 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 
 const UserSchema = {
-	name: {
-		first: String,
-		last: String,
-	},
 	password: String,
 	email: String,
-	books: [String],
 	tasks: [
 		{
 			title: String,
@@ -38,11 +33,8 @@ const generatePassword = async (password) => {
 
 module.exports.register = async (form) => {
 	const user = new User({
-		['name.first']: form.name.first,
-		['name.last']: form.name.last,
 		password: await generatePassword(form.password),
 		email: form.email,
-		books: []
 	});
 
 	return await user.save();
